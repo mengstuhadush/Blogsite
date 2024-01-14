@@ -1,0 +1,71 @@
+{% extends 'customer_order/base.html' %}
+
+{% block content %}
+
+
+
+    <h5> Welcome Mr, {{user}}! 👋 </h5>
+
+    <hr>
+
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
+
+        Create a new blog &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+    </a>
+
+    <hr> 
+
+    <table class="table table-hover table-bordered">
+
+        <thead class="table-light">
+
+            <tr>
+                <th scope="col"> ID </th>
+                <th scope="col"> TITLE </th>
+                <th scope="col"> CONTENT</th>
+                <th scope="col"> PUBLICATION DATE </th>
+                <th scope="col"> AUTHOR </th>
+                <th scope="col"> IMAGE </th>
+
+                <th scope="col"> View </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% if records %}
+
+            {% for record in records %}
+
+            <tr>
+
+                <td> {{record.id}} </td>
+                <td> {{record.title}} </td>
+
+                <td> {{record.content}} </td>
+
+                <td> {{record.pub_date}} </td>
+                <td> {{record.author}} </td>
+                <td>
+                {% if record.photo%}
+                <img src="{{record.photo.url}}" alt="{{record.photo}}" width="100" height="100">
+              {%endif%}</td>
+
+                <td> <a class="btn btn-success btn-sm" href="{% url 'record' record.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
+
+            </tr>
+
+            {% endfor %}
+        
+        {% endif %}
+
+        </tbody>
+
+
+    </table>
+
+
+{% endblock %}
